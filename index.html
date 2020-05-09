@@ -61,7 +61,9 @@
     </div>
 
     <div class="content">
-      <div class="question-title">How to build a website like Quora?</div>
+      <div class="question-title" id="question">
+        How to build a website like Quora?
+      </div>
       <div class="question-actions">
         <a href="#" class="inline">Answer</a>
         <a href="#" class="inline">Follow</a>
@@ -77,14 +79,40 @@
             class="inline profile-pic"
           />
           <div class=" details-text">
-            <h4 class="inline">Every One,</h4>
-            <P class="inline">i am the entirety of the world</P>
+            <h4 class="inline" id="name">Every One,</h4>
+            <p class="inline" id="slogan">i am the entirety of the world</p>
           </div>
-          <div class="answer-content">
+          <div class="answer-content" id="answer">
             You contact Boaz Adato off-course!
           </div>
         </div>
       </div>
     </div>
+
+    <script>
+      fetch("http://localhost:3000/question")
+        .then(function(res) {
+          if (res.status !== 200) {
+            console.log(
+              "there seem to be a problem. status code: " + res.status
+            );
+            return;
+          }
+
+          res.json().then(function(data) {
+            document.getElementById("question").innerHTML = data.question;
+            document.getElementById("name").innerHTML = data.answers[0].name;
+            document.getElementById("slogan").innerHTML =
+              data.answers[0].slogan;
+            document.getElementById("answer").innerHTML =
+              data.answers[0].answer;
+
+            console.log(data);
+          });
+        })
+        .catch(function(err) {
+          console.log("Fetch Error :-S", err);
+        });
+    </script>
   </body>
 </html>
