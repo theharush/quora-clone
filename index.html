@@ -62,7 +62,7 @@
 
     <div class="content">
       <div class="question-title" id="question">
-        How to build a website like Quora?
+        Loading...
       </div>
       <div class="question-actions">
         <a href="#" class="inline">Answer</a>
@@ -101,11 +101,11 @@
 
           res.json().then(function(data) {
             document.getElementById("question").innerHTML = data.question;
-            document.getElementById("name").innerHTML = data.answers[0].name;
-            document.getElementById("slogan").innerHTML =
-              data.answers[0].slogan;
-            document.getElementById("answer").innerHTML =
-              data.answers[0].answer;
+            // document.getElementById("name").innerHTML = data.answers[0].name;
+            // document.getElementById("slogan").innerHTML =
+            //   data.answers[0].slogan;
+            // document.getElementById("answer").innerHTML =
+            //   data.answers[0].answer;
 
             console.log(data);
           });

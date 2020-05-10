@@ -1,14 +1,13 @@
 "use strict";
+var mongoose = require('mongoose'),
+  Question = mongoose.model('Questions');
+
+
 
 exports.getQuestionData = function(req, res) {
-  res.json({
-    question: "how to code a webpage like quora",
-    answers: [
-      {
-        name: "Eyal Harush",
-        slogan: "Trying to code since 2020",
-        answer: "you should try contacting Boaz "
-      }
-    ]
+  Question.findOne(function(err, question) {
+    if (err)
+      res.send(err);
+    res.json(question);
   });
 };
