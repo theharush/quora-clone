@@ -36,17 +36,13 @@
         padding: 10px 0px 10px 0px;
         margin: 10px 0px 10px 0px;
       }
-      .profile-pic {
-        width: 40px;
-        height: 40px;
-        border-radius: 40px;
+
+      .answer {
+        border-style: solid;
+        border-width: 0px 0px 1px 0px;
       }
-      .details-text {
-        position: absolute;
-        display: inline-block;
-      }
-      .answer-content {
-        padding-top: 20px;
+      .answer-form {
+        padding-top:25px;
       }
     </style>
     <title>Quora Question</title>
@@ -69,23 +65,21 @@
         <a href="#" class="inline">Follow</a>
         <a href="#" class="inline">Request</a>
       </div>
-      <div class="answer-count">
+      <div class="answer-count" id="answer-count">
         3 Answers
       </div>
-      <div class="Answer">
-        <div class="details">
-          <img
-            src="https://pbs.twimg.com/profile_images/587949417577066499/3uCD4xxY_400x400.jpg"
-            class="inline profile-pic"
-          />
-          <div class=" details-text">
-            <h4 class="inline" id="name">Every One,</h4>
-            <p class="inline" id="slogan">i am the entirety of the world</p>
-          </div>
-          <div class="answer-content" id="answer">
-            You contact Boaz Adato off-course!
-          </div>
-        </div>
+      <div class="answers" id="answers">
+
+      </div>
+
+      <div class="answer-form">
+        <form method="POST" action="http://localhost/3000/question" id="answerForm">
+          <label for="Name">name:</label>
+          <input type="text" id="Name" name="Name"/>
+          <label for="Answer">answer:</label>
+          <input type="text" id="Answer" name="Answer" />
+          <input type="submit" value="Submit"/>
+        </form>
       </div>
     </div>
 
@@ -100,12 +94,34 @@
           }
 
           res.json().then(function(data) {
-            document.getElementById("question").innerHTML = data.question;
-            // document.getElementById("name").innerHTML = data.answers[0].name;
-            // document.getElementById("slogan").innerHTML =
-            //   data.answers[0].slogan;
-            // document.getElementById("answer").innerHTML =
-            //   data.answers[0].answer;
+            document.getElementById("question").innerHTML = data.Question;
+
+
+            if(data.Answers){
+              document.getElementById("answer-count").innerHTML = data.Answers.length + " Answers";
+              
+              data.Answers.forEach(function(answer) {
+                var name = document.createElement("h4");
+                name.appendChild(document.createTextNode(answer.Name));
+              
+
+                var details = document.createElement("p");
+                details.appendChild(document.createTextNode(answer.Answer));
+                details.class="details-text";
+
+                var answerdiv = document.createElement("div");
+                answerdiv.className="answer";
+                answerdiv.appendChild(name);
+                answerdiv.appendChild(details);
+
+                var answers = document.getElementById("answers");
+                answers.appendChild(answerdiv);
+
+              })
+            }
+
+
+            document.getElementById("answerForm").action ="http://localhost:3000/question/" + data._id.toString();
 
             console.log(data);
           });

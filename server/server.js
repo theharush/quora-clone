@@ -11,6 +11,7 @@ mongoose.connect(
 );
 
 
+
 const express = require("express"),
   app = express(),
   port = process.env.PORT || 3000;
@@ -25,6 +26,12 @@ app.use(function(req, res, next) {
   );
   next();
 });
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
+
 
 var routes = require("./api/routes/questionRoutes"); //inporting route
 routes(app); //register the route

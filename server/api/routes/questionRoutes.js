@@ -4,4 +4,8 @@ module.exports = function(app) {
 
   //Question Routes
   app.route("/question").get(question.getQuestionData);
+
+  app.route("/question/:questionId").post(question.postAnswer);
+
+
 };
