@@ -2,6 +2,8 @@
 var mongoose = require('mongoose'),
   Question = mongoose.model('Questions');
 
+
+
 //controller for fetching a random question from DB
 exports.getQuestionData = function (req, res) {
   Question.findOne(function (err, question) {

@@ -5,18 +5,19 @@ var Schema = mongoose.Schema;
 
 var QuestionSchema = new Schema({
   Question: {
-    type: String  },
+    type: String
+  },
   Created_date: {
     type: Date,
     default: Date.now
   },
   Answers: [{
-      Name:{type: String},
-      Answer:{type: String},
-      Created_date:{
-          type: Date,
-          default: Date.now
-      }
+    Name: { type: String },
+    Answer: { type: String },
+    Created_date: {
+      type: Date,
+      default: Date.now
+    }
   }]
 });
 
