@@ -9,8 +9,15 @@ mongoose.connect(
   keys.mongoURI,
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
+//check connection to DB
+const db = mongoose.connection;
+db.once('open', _ => {
+  console.log('Database connected:', keys.mongoURI)
+})
 
-
+db.on('error', err => {
+  console.error('connection error:', err)
+})
 
 const express = require("express"),
   app = express(),

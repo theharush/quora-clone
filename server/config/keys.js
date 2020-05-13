@@ -1,6 +1,8 @@
-// keys to use in dev mode only!
-// DONT commit this
-module.exports = {
-    mongoURI: "mongodb://Eyal:Ey12ha34@ds117965.mlab.com:17965/quora-dev",
-    redirectDomain: "http://localhost:3000"
-  };
+// keys.js - figure out what set of credentials to return
+if (process.env.NODE_ENV === "production") {
+  // we are in production - return the prod set of keys
+  module.exports = require("./prod");
+} else {
+  // we are in development - return the dev keys!!!
+  module.exports = require("./dev");
+}
