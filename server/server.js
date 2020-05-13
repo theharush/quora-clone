@@ -45,10 +45,8 @@ app.use(bodyParser.json())
 
 //importing routes
 var reqRoutes = require("./api/routes/questionRoutes");
-var clientRoutes = require("./api/routes/clientRoutes");
 //registering the routes
 reqRoutes(app);
-clientRoutes(app);
 
 app.listen(port);
 
