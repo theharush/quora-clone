@@ -2,13 +2,16 @@ const keys = require("./config/keys"),
   mongoose = require("mongoose"),
   bodyParser = require("body-parser"),
   path = require('path'),
-  Question = require('./api/models/questionModel');
+  Question = require('./api/models/questionModel'),
+  User = require('./api/models/userModel');
 
 
 const express = require("express"),
   app = express(),
   port = process.env.PORT || 3000;
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -28,20 +31,15 @@ db.on('error', err => {
   console.error('connection error:', err)
 })
 
-//enabling cors.
+//middleware for authenticating requests.
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
-app.use(bodyParser.json())
+  User.findOne({ Key: req.headers.key }, function (err, user) {
+    if (user)
+      next();
+    else
+      res.send("srry not srry");
+  })
+})
 
 //importing routes
 var reqRoutes = require("./api/routes/questionRoutes");

@@ -63,7 +63,7 @@
 
     <script>
 
-        fetch("http://localhost:3000/api/question")
+        fetch("http://localhost:3000/api/question", { headers: { "key": "asd123" } })
             .then(function (res) {
                 if (res.status !== 200) {
                     console.log(
