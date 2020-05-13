@@ -1,7 +1,16 @@
-var keys = require("./config/keys"),
+const keys = require("./config/keys"),
   mongoose = require("mongoose"),
   bodyParser = require("body-parser"),
-  Question = require('./api/models/questionModel'); //created model loading here
+  path = require('path'),
+  Question = require('./api/models/questionModel');
+
+
+const express = require("express"),
+  app = express(),
+  port = process.env.PORT || 3000;
+
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 //initialize mongoose
 mongoose.Promise = global.Promise;
@@ -19,12 +28,7 @@ db.on('error', err => {
   console.error('connection error:', err)
 })
 
-const express = require("express"),
-  app = express(),
-  port = process.env.PORT || 3000;
-
-app.use(bodyParser.json());
-
+//enabling cors.
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -39,10 +43,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-
-var routes = require("./api/routes/questionRoutes"); //inporting route
-routes(app); //register the route
-
+//importing routes
+var reqRoutes = require("./api/routes/questionRoutes");
+var clientRoutes = require("./api/routes/clientRoutes");
+//registering the routes
+reqRoutes(app);
+clientRoutes(app);
 
 app.listen(port);
 

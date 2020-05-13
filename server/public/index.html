@@ -63,7 +63,7 @@
 
     <script>
 
-        fetch("http://localhost:3000/question")
+        fetch("http://localhost:3000/api/question")
             .then(function (res) {
                 if (res.status !== 200) {
                     console.log(
@@ -89,7 +89,7 @@
 
                     }
 
-                    document.getElementById("answerForm").action = "http://localhost:3000/question/" + data._id.toString();
+                    document.getElementById("answerForm").action = "http://localhost:3000/api/question/" + data._id.toString();
 
                 });
             })
