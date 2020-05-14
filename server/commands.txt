@@ -1,0 +1,6 @@
+//commands for mongo:
+mongod - start a db server
+mongo - open mongo shell
+db - list of DBs
+use <DBname> - tells mongo what db to use
+db.<collection>.insertOne({<fieldname>:'<content>'}) - add something

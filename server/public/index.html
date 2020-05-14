@@ -12,6 +12,7 @@
         <a href="#" class="inline">Notifications</a>
         <input class="inline" type="text" value="Quora" />
         <input class="inline add-button" type="button" value="Add Question" />
+        <a href="/logout" class="inline">Logout</a>
     </div>
 
     <div class="content">
@@ -31,8 +32,6 @@
 
         <div class="answer-form">
             <form method="POST" action="http://localhost/3000/question" id="answerForm">
-                <label for="Name">name:</label>
-                <input type="text" id="Name" name="Name" />
                 <label for="Answer">answer:</label>
                 <input type="text" id="Answer" name="Answer" />
                 <input type="submit" value="Submit" />

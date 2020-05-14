@@ -17,3 +17,8 @@ exports.userLogin = function (req, res) {
 
     });
 }
+
+exports.userLogout = function (req, res) {
+    req.session = null;
+    res.redirect('/login.html');
+}

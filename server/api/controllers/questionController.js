@@ -17,8 +17,8 @@ exports.postAnswer = function (req, res) {
   Question.findById(req.params.questionId, function (err, question) {
     if (err)
       res.send(err);
-
-    question.Answers.push(req.body);
+    var answer = { Answer: req.body.Answer, Name: req.session.user.Name };
+    question.Answers.push(answer);
     question.save(function (err, updatedQuestion) {
       if (err)
         res.send(err);

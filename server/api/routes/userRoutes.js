@@ -4,4 +4,6 @@ module.exports = function (app) {
     //Question Routes
     app.route("/login").post(user.userLogin);
 
+    app.route("/logout").get(user.userLogout);
+
 };

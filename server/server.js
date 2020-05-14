@@ -43,14 +43,11 @@ db.on('error', err => {
 //middleware for authenticating requests.
 app.use('/api', function (req, res, next) {
   // req.session = null;
-  if (req.session && req.session.user) {
-    console.log(req.session.user);
-    console.log("user has request");
+  if (req.session && req.session.user)
     next();
-  }
-  else {
+
+  else
     res.sendStatus(403);
-  }
 });
 
 //importing routes
