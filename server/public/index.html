@@ -62,10 +62,13 @@
     </script>
 
     <script>
-
-        fetch("http://localhost:3000/api/question", { headers: { "key": "asd123" } })
+        console.log(document.cookie);
+        fetch("http://localhost:3000/api/question")
             .then(function (res) {
                 if (res.status !== 200) {
+                    if (res.status == 403) {
+                        window.location.replace("/login.html");
+                    }
                     console.log(
                         "there seem to be a problem. status code: " + res.status
                     );

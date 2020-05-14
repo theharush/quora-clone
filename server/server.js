@@ -2,6 +2,8 @@ const keys = require("./config/keys"),
   mongoose = require("mongoose"),
   bodyParser = require("body-parser"),
   path = require('path'),
+  cookieParser = require("cookie-parser"),
+  session = require("cookie-session"),
   Question = require('./api/models/questionModel'),
   User = require('./api/models/userModel');
 
@@ -14,6 +16,13 @@ const express = require("express"),
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//handkeing cookies
+app.use(cookieParser());
+app.use(session({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 
 //initialize mongoose
 mongoose.Promise = global.Promise;
@@ -32,19 +41,25 @@ db.on('error', err => {
 })
 
 //middleware for authenticating requests.
-app.use(function (req, res, next) {
-  User.findOne({ Key: req.headers.key }, function (err, user) {
-    if (user)
-      next();
-    else
-      res.send("srry not srry");
-  })
-})
+app.use('/api', function (req, res, next) {
+  // req.session = null;
+  if (req.session && req.session.user) {
+    console.log(req.session.user);
+    console.log("user has request");
+    next();
+  }
+  else {
+    res.sendStatus(403);
+  }
+});
 
 //importing routes
-var reqRoutes = require("./api/routes/questionRoutes");
+var reqRoutes = require("./api/routes/questionRoutes"),
+  userRoutes = require("./api/routes/userRoutes");
 //registering the routes
 reqRoutes(app);
+userRoutes(app);
+
 
 app.listen(port);
 
