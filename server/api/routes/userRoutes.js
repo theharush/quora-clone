@@ -1,7 +1,9 @@
 module.exports = function (app) {
     var user = require("../controllers/userController");
 
-    //Question Routes
+    //User Routes
+    app.route("/register").post(user.createUser);
+
     app.route("/login").post(user.userLogin);
 
     app.route("/logout").get(user.userLogout);
