@@ -3,8 +3,11 @@ module.exports = function (app) {
 
 
   //Question Routes
-  app.route("/api/question").get(question.getQuestionData);
+  app.route("/api/question").get(question.getQuestion);
 
-  app.route("/api/question/:questionId").post(question.postAnswer);
+  app.route("/api/questions").get(question.getQuestions);
+
+  app.route("/api/question/:questionId").get(question.getQuestion).post(question.postAnswer)
+
 
 };

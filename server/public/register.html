@@ -7,25 +7,25 @@
 
 <body>
     <div class="menu">
-        <h1 class="inline brand">Quora</h1>
-        <a href="#" class="inline">Home</a> <a href="#" class="inline">Answer</a>
+        <h1 class="inline brand"><a href="/">Quora</a></h1>
+        <a href="/" class="inline">Home</a> <a href="#" class="inline">Answer</a>
         <a href="#" class="inline">Notifications</a>
         <input class="inline" type="text" value="Quora" />
         <input class="inline add-button" type="button" value="Add Question" />
     </div>
 
     <div class="content">
-        <form method="POST" action="/register" style="text-align: center;">
+        <form method="POST" action="/register" class="user-form">
             <div>
-                <label for="Username">Username:</label>
+                <label for="Username" class="form-label">Username:</label>
                 <input type="text" name="Username" id="Username">
             </div>
             <div>
-                <label for="Name">Name:</label>
+                <label for="Name" class="form-label">Name:</label>
                 <input type="text" name="Name" id="Name">
             </div>
             <div>
-                <label for="Password">Password:</label>
+                <label for="Password" class="form-label">Password:</label>
                 <input type="password" name="Password" id="Password">
             </div>
             <input type="submit" value="submit">

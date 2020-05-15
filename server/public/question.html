@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <title>Quora</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+    <div class="menu">
+        <h1 class="inline brand"><a href="/">Quora</a></h1>
+        <a href="/" class="inline">Home</a> <a href="#" class="inline">Answer</a>
+        <a href="#" class="inline">Notifications</a>
+        <input class="inline" type="text" value="Quora" />
+        <input class="inline add-button" type="button" value="Add Question" />
+        <a href="/logout" class="inline">Logout</a>
+    </div>
+
+    <div class="content">
+        <div class="question-title" id="question">
+            Loading...
+        </div>
+        <div class="question-actions">
+            <a href="#" class="inline">Answer</a>
+            <a href="#" class="inline">Follow</a>
+            <a href="#" class="inline">Request</a>
+        </div>
+        <div class="answer-count" id="answerCount"></div>
+
+        <div class="answers" id="answers">
+
+        </div>
+
+        <div class="answer-form">
+            <form method="POST" action="http://localhost/3000/question" id="answerForm">
+                <label for="Answer">answer:</label>
+                <input type="text" id="Answer" name="Answer" />
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+
+
+
+    <script src="./handlebars-v4.7.6.js"></script>
+
+    <script id="textTemp" type="text/x-handlebars-template">
+            {{ text }}
+    </script>
+
+
+    <script id="answerTemp" type="text/x-handlebars-template">
+        <div>
+            <div class="details">
+              <img
+                src="https://pbs.twimg.com/profile_images/587949417577066499/3uCD4xxY_400x400.jpg" class="inline profile-pic"/>
+              <div class=" details-text">
+                <h4 class="inline" id="name">{{ name }}</h4>
+                <p class="inline" id="answer">{{ answer }}</p>
+              </div>
+        </div>
+    </script>
+
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var fetchUrl = "http://localhost:3000/api/question/" + urlParams.get('questionId');
+        fetch(fetchUrl)
+            .then(function (res) {
+                if (res.status !== 200) {
+                    if (res.status == 403) {
+                        window.location.replace("/login.html");
+                    }
+                    console.log(
+                        "there seem to be a problem. status code: " + res.status
+                    );
+                    return;
+                }
+
+                res.json().then(function (data) {
+
+                    questionTemp = Handlebars.compile(document.querySelector("#textTemp").innerHTML);
+                    document.querySelector("#question").innerHTML = questionTemp({ text: data.Question });;
+
+                    if (data.Answers) {
+                        countTemp = Handlebars.compile(document.querySelector("#textTemp").innerHTML);
+                        document.querySelector("#answerCount").innerHTML = questionTemp({ text: data.Answers.length + " Answers" });;
+
+
+                        data.Answers.forEach(function (answer) {
+                            answerTemp = Handlebars.compile(document.querySelector("#answerTemp").innerHTML);
+                            document.querySelector("#answers").innerHTML += answerTemp({ name: answer.Name, answer: answer.Answer });;
+                        })
+
+                    }
+
+                    document.getElementById("answerForm").action = "http://localhost:3000/api/question/" + data._id.toString();
+
+                });
+            })
+            .catch(function (err) {
+                console.log("Fetch Error :-S", err);
+            });
+    </script>
+
+</body>
+
+</html>

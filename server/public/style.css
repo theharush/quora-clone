@@ -60,3 +60,10 @@ body {
     position: absolute;
     display: inline-block;
   }
+  .form-label{
+    color:red;
+  }
+  .user-form{
+    text-align: center;
+    padding: 30px;
+  }
