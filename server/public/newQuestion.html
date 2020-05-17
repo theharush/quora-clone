@@ -11,24 +11,17 @@
       <a href="#" class="inline">Notifications</a>
       <input class="inline" type="text" value="Quora" />
       <input class="inline add-button" type="button" value="Add Question" />
+      <a href="/logout" class="inline">Logout</a>
     </div>
 
     <div class="content">
-      <form method="POST" action="/login" class="user-form">
+      <form method="POST" action="/api/postQuestion" class="user-form">
         <div>
-          <label for="username" class="form-label">Username:</label>
-          <input type="text" name="username" id="username" />
+          <label for="question" class="form-label">Question:</label>
+          <input type="text" name="question" id="question" required />
         </div>
-
-        <div>
-          <label for="password" class="form-label">Password:</label>
-          <input type="password" name="password" id="password" />
-        </div>
-
         <input type="submit" value="submit" />
       </form>
-
-      <p>or you can register <a href="/register.html">here</a></p>
     </div>
   </body>
 </html>

@@ -1,65 +1,65 @@
 <html>
-
-<head>
+  <head>
     <title>Quora</title>
-    <link rel="stylesheet" type="text/css" href="./style.css">
-</head>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
 
-<body>
+  <body>
     <div class="menu">
-        <h1 class="inline brand"><a href="/">Quora</a></h1>
-        <a href="/" class="inline">Home</a> <a href="#" class="inline">Answer</a>
-        <a href="#" class="inline">Notifications</a>
-        <input class="inline" type="text" value="Quora" />
-        <input class="inline add-button" type="button" value="Add Question" />
-        <a href="/logout" class="inline">Logout</a>
+      <h1 class="inline brand"><a href="/">Quora</a></h1>
+      <a href="/" class="inline">Home</a> <a href="#" class="inline">Answer</a>
+      <a href="#" class="inline">Notifications</a>
+      <input class="inline" type="text" value="Quora" />
+      <input class="inline add-button" type="button" value="Add Question" />
+      <a href="/logout" class="inline">Logout</a>
     </div>
 
     <div class="content">
-        <div class="questions" id="questions">
-
-        </div>
+      <div class="questions" id="questions"></div>
     </div>
 
     <script src="./handlebars-v4.7.6.js"></script>
 
     <script id="questionTemp" type="text/x-handlebars-template">
-        <div class="question">
-            <div class="question-title" id="question">
-                <a href="/question.html?questionId={{ questionId }}"> {{ questionTitle }} </a>
-            </div>
-            <div class="answer-count" id="answerCount">{{ answerCount }} Answers</div>
-        </div>
+      <div class="question">
+          <div class="question-title" id="question">
+              <a href="/question.html?questionId={{ questionId }}"> {{ questionTitle }} </a>
+          </div>
+          <div class="answer-count" id="answerCount">{{ answerCount }} Answers</div>
+      </div>
     </script>
 
     <script>
-        fetch("http://localhost:3000/api/questions", { credentials: 'include' })
-            .then(function (res) {
-                if (res.status !== 200) {
-                    if (res.status == 403) {
-                        window.location.replace("/login.html");
-                    }
-                    console.log(
-                        "there seem to be a problem. status code: " + res.status
-                    );
-                    return;
-                }
+      fetch("http://localhost:8000/api/questions", { credentials: "include" })
+        .then(function(res) {
+          if (res.status !== 200) {
+            if (res.status == 403) {
+              window.location.replace("/login.html");
+            }
+            console.log(
+              "there seem to be a problem. status code: " + res.status
+            );
+            return;
+          }
 
-                res.json().then(function (questions) {
-                    if (questions) {
-                        questions.forEach(function (question) {
-                            questionTemp = Handlebars.compile(document.querySelector("#questionTemp").innerHTML);
-                            document.querySelector("#questions").innerHTML += questionTemp({ questionTitle: question.Question, answerCount: question.Answers.length, questionId: question._id });;
-
-                        })
-                    }
+          res.json().then(function(questions) {
+            if (questions) {
+              questions.forEach(function(question) {
+                questionTemp = Handlebars.compile(
+                  document.querySelector("#questionTemp").innerHTML
+                );
+                document.querySelector("#questions").innerHTML += questionTemp({
+                  questionTitle: question.question,
+                  answerCount: question.answers.length,
+                  questionId: question._id
                 });
-            })
-            .catch(function (err) {
-                console.log("Fetch Error :-S", err);
-            });
+              });
+            }
+          });
+        })
+        .catch(function(err) {
+          console.log("Fetch Error :-S", err);
+        });
     </script>
-
-</body>
-
+  </body>
 </html>

@@ -1,24 +1,25 @@
-'use strict';
-var mongoose = require('mongoose');
+"use strict";
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-
 var QuestionSchema = new Schema({
-  Question: {
+  question: {
     type: String
   },
-  Created_date: {
+  created_date: {
     type: Date,
     default: Date.now
   },
-  Answers: [{
-    Name: { type: String },
-    Answer: { type: String },
-    Created_date: {
-      type: Date,
-      default: Date.now
+  answers: [
+    {
+      name: { type: String },
+      answer: { type: String },
+      created_date: {
+        type: Date,
+        default: Date.now
+      }
     }
-  }]
+  ]
 });
 
-module.exports = mongoose.model('Questions', QuestionSchema);
+module.exports = mongoose.model("Questions", QuestionSchema);
