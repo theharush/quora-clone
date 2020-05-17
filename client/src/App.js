@@ -1,21 +1,27 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-class App extends Component {
+import { Provider } from "react-redux";
+import store from "./store";
+
+import Navbar from "./components/layout/Navbar";
+import Landing from "./components/layout/Landing";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
+
+export default class App extends Component {
   render() {
     return (
-      <Router>
-        <Route path="/" exact component={TodosList} />
-        <Route path="/edit/:id" component={EditTodo} />
-        <Route path="/create" component={CreateTodo} />
-
-        <div className="container">
-          <h2>MERN-Stack Todo App</h2>
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <Navbar />
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }
-
-export default App;

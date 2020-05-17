@@ -12,6 +12,10 @@ const expressSession = require("express-session")({
   saveUninitialized: false
 });
 
+//enabling cors
+const cors = require("cors");
+app.use(cors());
+
 // parse application/x-www-form-urlencoded
 const bodyParser = require("body-parser");
 

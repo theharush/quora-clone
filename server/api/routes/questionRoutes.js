@@ -3,12 +3,12 @@ module.exports = function(app) {
     user = require("../controllers/userController");
 
   //Question Routes
-  app.get("/api/questions", user.checkAuth, question.getQuestions);
+  app.get("/api/questions", question.getQuestions);
 
-  app.get("/api/question", user.checkAuth, question.getQuestion);
+  app.get("/api/question", question.getQuestion);
 
   app.post("/api/postQuestion", user.checkAuth, question.postQuestion);
 
-  app.get("/api/question/:questionId", user.checkAuth, question.getQuestion);
+  app.get("/api/question/:questionId", question.getQuestion);
   app.post("/api/question/:questionId", user.checkAuth, question.postAnswer);
 };
