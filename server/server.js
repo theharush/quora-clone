@@ -17,6 +17,7 @@ const bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+app.use(expressSession);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -50,7 +51,6 @@ app.use(passport.session());
 
 // passport-local authentication
 passport.use(User.createStrategy());
-
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 

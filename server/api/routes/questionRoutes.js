@@ -5,11 +5,12 @@ module.exports = function (app) {
 
 
   //Question Routes
-  app.route("/api/question").get(user.checkAuth, question.getQuestion);
+  app.get("/api/question", user.checkAuth, question.getQuestion);
 
-  app.route("/api/questions").get(user.checkAuth, question.getQuestions);
+  app.get("/api/questions", user.checkAuth, question.getQuestions);
 
-  app.route("/api/question/:questionId").get(user.checkAuth, question.getQuestion).post(user.checkAuth, question.postAnswer)
+  app.get("/api/question/:questionId", user.checkAuth, question.getQuestion);
+  app.post("/api/question/:questionId", user.checkAuth, question.postAnswer)
 
 
 };

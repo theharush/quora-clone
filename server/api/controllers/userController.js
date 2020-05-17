@@ -5,13 +5,12 @@ const mongoose = require('mongoose'),
 //middleware for authenticating requests.
 exports.checkAuth = function (req, res, next) {
     if (req.user) {
-        console.log(req.user);
-
         next();
     }
-
-    else
-        res.sendStatus(403);
+    else {
+        console.log(req.user);
+        res.send(403, "unauthorized");
+    }
 }
 
 exports.userLogin = function (req, res, next) {
@@ -42,20 +41,15 @@ exports.userLogout = function (req, res) {
 }
 
 exports.createUser = function (req, res) {
-    User.findOne({ Username: req.body.Username }, function (err, user) {
-        if (err)
-            res.send(err);
-        if (user)
-            res.sendStatus(403);
-        else {
+    User.register(new User({ username: req.body.username, name: req.body.name }),
+        req.body.password, function (err, user) {
+            if (err) {
+                console.log(err);
+                return res.redirect('/register.html');
+            }
 
-            var newUser = new User(req.body);
-            newUser.save(function (err, user) {
-                if (err)
-                    res.send(err)
-                req.session.user = user;
+            passport.authenticate('local')(req, res, function () {
                 res.redirect('/');
-            })
-        }
-    })
+            });
+        });
 }
