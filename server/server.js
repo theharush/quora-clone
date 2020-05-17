@@ -1,35 +1,34 @@
 const keys = require("./config/keys"),
-  mongoose = require("mongoose"),
-  bodyParser = require("body-parser"),
-  path = require('path'),
-  cookieParser = require("cookie-parser"),
-  session = require("cookie-session"),
-  Question = require('./api/models/questionModel'),
-  User = require('./api/models/userModel');
-
+  path = require('path');
 
 const express = require("express"),
   app = express(),
   port = process.env.PORT || 3000;
 
+// creating a session
+const expressSession = require('express-session')({
+  secret: keys.cookieSecret,
+  resave: false,
+  saveUninitialized: false
+});
+
 // parse application/x-www-form-urlencoded
+const bodyParser = require("body-parser");
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//handkeing cookies
-app.use(cookieParser());
-app.use(session({
-  name: 'session',
-  keys: ['key1', 'key2']
-}))
 
 //initialize mongoose
+const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
+
 mongoose.connect(
   keys.mongoURI,
-  { useNewUrlParser: true, useUnifiedTopology: true }
+  { useNewUrlParser: true, useUnifiedTopology: true, 'useCreateIndex': true }
 );
+
 //check connection to DB
 const db = mongoose.connection;
 db.once('open', _ => {
@@ -40,23 +39,29 @@ db.on('error', err => {
   console.error('connection error:', err)
 })
 
-//middleware for authenticating requests.
-app.use('/api', function (req, res, next) {
-  // req.session = null;
-  if (req.session && req.session.user)
-    next();
+//importing mongoose schemas
+const Question = require('./api/models/questionModel'),
+  User = require('./api/models/userModel');
 
-  else
-    res.sendStatus(403);
-});
+//initiallizing passport
+const passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session());
+
+// passport-local authentication
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 //importing routes
 var reqRoutes = require("./api/routes/questionRoutes"),
   userRoutes = require("./api/routes/userRoutes");
+
 //registering the routes
 reqRoutes(app);
 userRoutes(app);
-
 
 app.listen(port);
 

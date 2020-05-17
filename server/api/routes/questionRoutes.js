@@ -1,13 +1,15 @@
 module.exports = function (app) {
-  var question = require("../controllers/questionController");
+  const question = require("../controllers/questionController"),
+    user = require("../controllers/userController");
+
 
 
   //Question Routes
-  app.route("/api/question").get(question.getQuestion);
+  app.route("/api/question").get(user.checkAuth, question.getQuestion);
 
-  app.route("/api/questions").get(question.getQuestions);
+  app.route("/api/questions").get(user.checkAuth, question.getQuestions);
 
-  app.route("/api/question/:questionId").get(question.getQuestion).post(question.postAnswer)
+  app.route("/api/question/:questionId").get(user.checkAuth, question.getQuestion).post(user.checkAuth, question.postAnswer)
 
 
 };
