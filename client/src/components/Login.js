@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from "axios";
+import history from '../history';
 
 export default class Login extends Component {
     constructor(props) {
@@ -10,12 +12,22 @@ export default class Login extends Component {
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-    }
+
     handleSubmit(e) {
-        alert(`form submitted with username: ${this.state.username} and password :${this.state.password}`);
         e.preventDefault();
+        const user = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        axios.post('http://localhost:8000/login', user)
+            .then(res => {
+                this.props.updateUser(res.data);
+                history.push("/");
+            });
     }
+
     handleInputChange(e) {
         const target = e.target;
         const value = target.value;
@@ -41,7 +53,7 @@ export default class Login extends Component {
                     Password:
                     <input
                         name="password"
-                        type="text"
+                        type="password"
                         value={this.state.password}
                         onChange={this.handleInputChange}
                     />

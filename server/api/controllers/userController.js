@@ -21,15 +21,14 @@ exports.userLogin = function (req, res, next) {
             }
 
             if (!user) {
-                return res.redirect('/login.html?info=' + info);
+                return res.send(403, info);
             }
 
             req.logIn(user, function (err) {
                 if (err) {
                     return next(err);
                 }
-
-                return res.redirect('/');
+                return res.send(user);
             });
 
         })(req, res, next);
