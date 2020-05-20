@@ -21,14 +21,14 @@ exports.userLogin = function (req, res, next) {
             }
 
             if (!user) {
-                return res.send(403, info);
+                return res.json({ errMsg: info });
             }
 
             req.logIn(user, function (err) {
                 if (err) {
                     return next(err);
                 }
-                return res.send(user);
+                return res.json({ user });
             });
 
         })(req, res, next);

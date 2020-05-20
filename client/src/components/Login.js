@@ -8,6 +8,7 @@ export default class Login extends Component {
         this.state = {
             username: "",
             password: "",
+            errMsg: "",
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -23,8 +24,13 @@ export default class Login extends Component {
         }
         axios.post('http://localhost:8000/login', user)
             .then(res => {
-                this.props.updateUser(res.data);
-                history.push("/");
+                if (res.data.user) {
+                    this.props.updateUser(res.data.user);
+                    history.push("/");
+                } else {
+                    console.log(res.data.errMsg);
+                    this.setState({ errMsg: res.data.errMsg })
+                }
             });
     }
 
@@ -40,6 +46,7 @@ export default class Login extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
+                <h5>{this.state.errMsg.message}</h5>
                 <label>
                     Username:
                     <input
