@@ -8,4 +8,6 @@ module.exports = function (app) {
 
     app.route("/logout").get(user.userLogout);
 
+    app.route("/getUser").get(user.getUser);
+
 };

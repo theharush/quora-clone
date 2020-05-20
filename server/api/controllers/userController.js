@@ -36,7 +36,11 @@ exports.userLogin = function (req, res, next) {
 
 exports.userLogout = function (req, res) {
     req.logout();
-    res.redirect('/login.html');
+    res.send(200);
+}
+
+exports.getUser = function (req, res) {
+    res.send(req.user);
 }
 
 exports.createUser = function (req, res) {
