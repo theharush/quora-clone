@@ -8,7 +8,7 @@ exports.checkAuth = function (req, res, next) {
         next();
     }
     else {
-        console.log(req.user);
+        console.log("unauthorized request has been made");
         res.send(403, "unauthorized");
     }
 }

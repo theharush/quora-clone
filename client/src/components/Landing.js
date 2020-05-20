@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 export default class Landing extends Component {
     render() {
@@ -10,4 +11,9 @@ export default class Landing extends Component {
             </div>
         )
     }
-}
+
+    componentDidMount() {
+        axios.get("http://localhost:8000/api/questions")
+            .then(res => console.log(res))
+    }
+} 
