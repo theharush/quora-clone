@@ -21,7 +21,7 @@ export default class App extends Component {
     this.setState({ user: user });
   }
 
-  render() {
+  getAppByUser() {
     if (this.state.user) {
       return (
         <Router history={history}>
@@ -32,19 +32,23 @@ export default class App extends Component {
           />
         </Router>
       )
+    } else {
+
+      return (
+        <Router history={history}>
+          <GuestNavBar />
+          <Route
+            exact
+            path="/"
+            render={props => (<Login {...props} updateUser={this.updateUser} />)}
+          />
+          <Route exact path="/register" component={Register} />
+        </Router>
+      )
     }
+  }
 
-    return (
-      <Router history={history}>
-        <GuestNavBar />
-        <Route
-          exact
-          path="/"
-          render={props => (<Login {...props} updateUser={this.updateUser} />)}
-        />
-        <Route exact path="/register" component={Register} />
-      </Router>
-
-    )
+  render() {
+    return this.getAppByUser()
   }
 }
