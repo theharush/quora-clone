@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Router, Route } from "react-router-dom";
 import history from "./history";
 import axios from "axios";
-import { withCookies } from 'react-cookie';
-
 
 import UserNavBar from "./components/navbars/UserNavBar";
 import GuestNavBar from "./components/navbars/GuestNavBar";
@@ -13,7 +11,7 @@ import Register from "./components/auth/Register";
 import Question from "./components/questions/Question";
 import NewQuestion from "./components/questions/NewQuestion";
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,12 +23,7 @@ class App extends Component {
     this.updateQuestions = this.updateQuestions.bind(this);
   }
 
-  updateUser(res) {
-    const { cookies } = this.props;
-    const { user } = res.data;
-
-    console.log(res);
-
+  updateUser(user) {
     let isLogged = user.name ? true : false;
 
     this.setState({
@@ -44,10 +37,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:8000/getUser").then(req => {
-      if (req.data) {
-        console.log(req.data);
-        this.updateUser(req.data);
+    axios.get("http://localhost:8000/getUser").then(res => {
+      if (res.data) {
+        this.updateUser(res.data);
       }
     });
   }
@@ -69,7 +61,16 @@ class App extends Component {
               />
             )}
           />
-          <Route path="/newQuestion" render={props => (<NewQuestion {...props} user={this.state.user} />)} />
+          <Route
+            path="/newQuestion"
+            render={props => (
+              <NewQuestion
+                {...props}
+                questions={this.state.loadedQuestions}
+                updateQuestions={this.updateQuestions}
+              />
+            )}
+          />
           <Route
             path="/question/:questionId"
             render={props => (
@@ -96,5 +97,3 @@ class App extends Component {
     return this.getAppByUser();
   }
 }
-
-export default withCookies(App);

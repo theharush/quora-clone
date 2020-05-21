@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 
 export default class Question extends Component {
   constructor(props) {
@@ -17,9 +17,7 @@ export default class Question extends Component {
   }
 
   getQuestionFromState(questions, questionId) {
-    const question = questions.find(
-      question => question._id === questionId
-    );
+    const question = questions.find(question => question._id === questionId);
     if (question) {
       this.setQuestionState(question);
       return true;
@@ -27,17 +25,15 @@ export default class Question extends Component {
   }
 
   getQuestionFromServer(questionId) {
-    axios.get(`http://localhost:8000/api/question/${questionId}`).then(
-      req => {
-        this.setQuestionState(req.data)
-      }
-    )
+    axios.get(`http://localhost:8000/api/question/${questionId}`).then(req => {
+      if (req.data.question) this.setQuestionState(req.data);
+    });
   }
 
   setQuestionState(question) {
     this.setState({
       question: question
-    })
+    });
   }
 
   componentDidMount() {
@@ -52,18 +48,19 @@ export default class Question extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <h1>{this.state.question.question}</h1>
-        <div class="question-actions">
-          <Link to="#" class="inline">
+        <div className="question-actions">
+          <Link to="#" className="inline">
             Answer
           </Link>
-          <Link to="#" class="inline">
+          <Link to="#" className="inline">
             Follow
           </Link>
         </div>
-        <div class="answer-count" id="answerCount">
+        <div className="answer-count" id="answerCount">
           {this.state.question.answers.length} Answers
         </div>
       </div>
