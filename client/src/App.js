@@ -9,6 +9,7 @@ import Landing from "./components/Landing";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Question from "./components/questions/Question";
+import NewQuestion from "./components/questions/NewQuestion";
 
 export default class App extends Component {
   constructor(props) {
@@ -60,6 +61,7 @@ export default class App extends Component {
               />
             )}
           />
+          <Route path="/newQuestion" render={props => (<NewQuestion {...props} user={this.state.user} />)} />
           <Route
             path="/question/:questionId"
             render={props => (

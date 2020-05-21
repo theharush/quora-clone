@@ -23,8 +23,8 @@ export default class UserNavBar extends Component {
         return (
             <nav className="menu">
                 <Link to="/"><h1 className="inline brand">Quora</h1></Link>
-                <Link to="/" className="inline">Home</Link>
-                <Link to="/addQuestion" className="inline">Add Question</Link>
+                <Link to="/" className="inline">Explore</Link>
+                <Link to="/newQuestion" className="inline">Ask</Link>
                 <div to="/login" className="inline">Hello, {this.props.user.name}</div>
                 <button className="inline" onClick={this.props.logoutUser}> logout</button>
             </nav>

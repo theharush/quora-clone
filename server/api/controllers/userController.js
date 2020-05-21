@@ -30,7 +30,6 @@ exports.userLogin = function (req, res, next) {
                 }
                 return res.json({ user });
             });
-
         })(req, res, next);
 }
 
