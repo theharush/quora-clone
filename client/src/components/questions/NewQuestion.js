@@ -24,7 +24,7 @@ export default class NewQuestion extends Component {
 
     axios.post("http://localhost:8000/api/postQuestion", question).then(res => {
       if (res.data.question) {
-        const updatedQuestions = [...this.props.questions, res.data.question];
+        const updatedQuestions = [...this.props.questions, res.data];
         this.props.updateQuestions(updatedQuestions);
 
         history.push(`/question/${res.data._id}`);
