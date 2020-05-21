@@ -1,25 +1,54 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios"
 
 export default class Question extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      question: null
+      question: {
+        question: "Loading...",
+        answers: []
+      }
     };
+
+    this.setQuestionState = this.setQuestionState.bind(this);
   }
-  UNSAFE_componentWillMount() {
+
+  getQuestionFromState(questions, questionId) {
+    const question = questions.find(
+      question => question._id === questionId
+    );
+    if (question) {
+      this.setQuestionState(question);
+      return true;
+    } else return false;
+  }
+
+  getQuestionFromServer(questionId) {
+    axios.get(`http://localhost:8000/api/question/${questionId}`).then(
+      req => {
+        this.setQuestionState(req.data)
+      }
+    )
+  }
+
+  setQuestionState(question) {
+    this.setState({
+      question: question
+    })
+  }
+
+  componentDidMount() {
     const {
       match: { params }
     } = this.props;
 
-    const question = this.props.questions.find(
-      question => question._id === params.questionId
-    );
-
-    this.setState({
-      question: question
-    });
+    if (this.props.questions) {
+      if (!this.getQuestionFromState(this.props.questions, params.questionId))
+        this.getQuestionFromServer(params.questionId);
+    }
   }
 
   render() {
@@ -27,12 +56,12 @@ export default class Question extends Component {
       <div>
         <h1>{this.state.question.question}</h1>
         <div class="question-actions">
-          <a href="#" class="inline">
+          <Link to="#" class="inline">
             Answer
-          </a>
-          <a href="#" class="inline">
+          </Link>
+          <Link to="#" class="inline">
             Follow
-          </a>
+          </Link>
         </div>
         <div class="answer-count" id="answerCount">
           {this.state.question.answers.length} Answers

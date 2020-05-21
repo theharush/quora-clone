@@ -73,7 +73,6 @@ export default class App extends Component {
         <Router history={history}>
           <GuestNavBar />
           <Route
-            exact
             path="/"
             render={props => <Login {...props} updateUser={this.updateUser} />}
           />
