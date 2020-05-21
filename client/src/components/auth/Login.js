@@ -23,7 +23,7 @@ export default class Login extends Component {
     };
     axios.post("http://localhost:8000/login", user).then(res => {
       if (res.data.user) {
-        this.props.updateUser(res.data.user);
+        this.props.updateUser(res);
         history.push("/");
       } else {
         console.log(res.data.errMsg);
