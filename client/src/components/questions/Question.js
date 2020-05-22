@@ -51,7 +51,6 @@ export default class Question extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <h1>{this.state.question.question}</h1>
@@ -68,6 +67,7 @@ export default class Question extends Component {
         </div>
         <AnswerForm
           questionId={this.state.question._id}
+          questions={this.props.questions}
           updateQuestions={this.props.updateQuestions}
         />
       </div>

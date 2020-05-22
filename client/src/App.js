@@ -34,6 +34,8 @@ export default class App extends Component {
 
   updateQuestions(questions) {
     this.setState({ loadedQuestions: questions });
+    console.log("question list has been updated");
+    console.log(this.state.loadedQuestions);
   }
 
   componentDidMount() {
@@ -74,7 +76,11 @@ export default class App extends Component {
           <Route
             path="/question/:questionId"
             render={props => (
-              <Question {...props} questions={this.state.loadedQuestions} />
+              <Question
+                {...props}
+                questions={this.state.loadedQuestions}
+                updateQuestions={this.updateQuestions}
+              />
             )}
           />
         </Router>
