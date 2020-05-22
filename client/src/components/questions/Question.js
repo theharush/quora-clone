@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import AnswerList from "./AnswerList";
 import AnswerForm from "./AnswerForm";
 
 export default class Question extends Component {
@@ -51,6 +52,10 @@ export default class Question extends Component {
   }
 
   render() {
+    let answerList;
+    if (this.state.question.answers != undefined) {
+      answerList = <AnswerList answers={this.state.question.answers} />;
+    }
     return (
       <div>
         <h1>{this.state.question.question}</h1>
@@ -65,6 +70,9 @@ export default class Question extends Component {
         <div className="answer-count" id="answerCount">
           {this.state.question.answers.length} Answers
         </div>
+
+        {answerList}
+
         <AnswerForm
           questionId={this.state.question._id}
           questions={this.props.questions}
