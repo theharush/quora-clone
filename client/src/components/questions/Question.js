@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import AnswerForm from "./AnswerForm";
+
 export default class Question extends Component {
   constructor(props) {
     super(props);
@@ -9,7 +11,8 @@ export default class Question extends Component {
     this.state = {
       question: {
         question: "Loading...",
-        answers: []
+        answers: [],
+        questionId: ""
       }
     };
 
@@ -63,6 +66,10 @@ export default class Question extends Component {
         <div className="answer-count" id="answerCount">
           {this.state.question.answers.length} Answers
         </div>
+        <AnswerForm
+          questionId={this.state.question._id}
+          updateQuestions={this.props.updateQuestions}
+        />
       </div>
     );
   }

@@ -3,27 +3,27 @@ var mongoose = require("mongoose"),
   Question = mongoose.model("Questions");
 
 //controller for fetching all questions from DB
-exports.getQuestions = function(req, res) {
+exports.getQuestions = function (req, res) {
   Question.find()
     .limit(10)
-    .exec(function(err, questions) {
+    .exec(function (err, questions) {
       if (err) res.send(err);
       res.json(questions);
     });
 };
 
 //controller for fetching a random question from DB
-exports.getQuestion = function(req, res) {
-  Question.findById(req.params.questionId, function(err, question) {
+exports.getQuestion = function (req, res) {
+  Question.findById(req.params.questionId, function (err, question) {
     if (err) res.send(err);
     else res.json(question);
   });
 };
 
 //controller for posting a new question.
-exports.postQuestion = function(req, res) {
+exports.postQuestion = function (req, res) {
   var question = new Question(req.body);
-  question.save(function(err, question) {
+  question.save(function (err, question) {
     if (err) {
       res.send(err);
     } else res.send(question);
@@ -31,14 +31,14 @@ exports.postQuestion = function(req, res) {
 };
 
 //controller for posting an answer on a question
-exports.postAnswer = function(req, res) {
-  Question.findById(req.params.questionId, function(err, question) {
+exports.postAnswer = function (req, res) {
+  Question.findById(req.params.questionId, function (err, question) {
     if (err) res.send(err);
     var answer = { Answer: req.body.answer, name: req.user.name };
     question.answers.push(answer);
-    question.save(function(err, updatedQuestion) {
+    question.save(function (err, updatedQuestion) {
       if (err) res.send(err);
-      res.redirect("back");
+      res.send(question);
     });
   });
 };
