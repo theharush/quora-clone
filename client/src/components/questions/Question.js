@@ -53,7 +53,7 @@ export default class Question extends Component {
 
   render() {
     let answerList;
-    if (this.state.question.answers != undefined) {
+    if (this.state.question.answers !== undefined) {
       answerList = <AnswerList answers={this.state.question.answers} />;
     }
     return (
@@ -77,6 +77,7 @@ export default class Question extends Component {
           questionId={this.state.question._id}
           questions={this.props.questions}
           updateQuestions={this.props.updateQuestions}
+          setQuestionState={this.setQuestionState}
         />
       </div>
     );

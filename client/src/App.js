@@ -34,8 +34,6 @@ export default class App extends Component {
 
   updateQuestions(questions) {
     this.setState({ loadedQuestions: questions });
-    console.log("question list has been updated");
-    console.log(this.state.loadedQuestions);
   }
 
   componentDidMount() {

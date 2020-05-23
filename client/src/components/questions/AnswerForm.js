@@ -39,6 +39,7 @@ export default class NewQuestion extends Component {
           }
 
           this.props.updateQuestions(updatedQuestions);
+          this.props.setQuestionState(res.data);
         } else {
         }
       });
