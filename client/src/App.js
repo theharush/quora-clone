@@ -17,7 +17,8 @@ export default class App extends Component {
     this.state = {
       user: null,
       isLogged: false,
-      loadedQuestions: []
+      loadedQuestions: [],
+      lastQuestionDate: Date.now()
     };
     this.updateUser = this.updateUser.bind(this);
     this.updateQuestions = this.updateQuestions.bind(this);
@@ -33,7 +34,11 @@ export default class App extends Component {
   }
 
   updateQuestions(questions) {
-    this.setState({ loadedQuestions: questions });
+    if (questions && questions.length >= 1)
+      this.setState({
+        loadedQuestions: questions,
+        lastQuestionDate: questions[questions.length - 1].created_date
+      });
   }
 
   componentDidMount() {
@@ -58,6 +63,7 @@ export default class App extends Component {
                 user={this.state.user}
                 questions={this.state.loadedQuestions}
                 updateQuestions={this.updateQuestions}
+                lastQuestionDate={this.state.lastQuestionDate}
               />
             )}
           />

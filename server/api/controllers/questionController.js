@@ -2,9 +2,20 @@
 var mongoose = require("mongoose"),
   Question = mongoose.model("Questions");
 
-//controller for fetching all questions from DB
+//controller for fetching last 10 questions from DB
 exports.getQuestions = function(req, res) {
   Question.find()
+    .sort({ created_date: -1 })
+    .limit(10)
+    .exec(function(err, questions) {
+      if (err) res.send(err);
+      res.json(questions);
+    });
+};
+
+//controller for fetching last 10 questions after a given date from DB
+exports.getMoreQuestions = function(req, res) {
+  Question.find({ created_date: { $lt: req.params.LastQuestionDate } })
     .sort({ created_date: -1 })
     .limit(10)
     .exec(function(err, questions) {
