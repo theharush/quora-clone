@@ -5,7 +5,7 @@ var mongoose = require("mongoose"),
 //controller for fetching all questions from DB
 exports.getQuestions = function(req, res) {
   Question.find()
-    .sort({ _id: -1 })
+    .sort({ created_date: -1 })
     .limit(10)
     .exec(function(err, questions) {
       if (err) res.send(err);
