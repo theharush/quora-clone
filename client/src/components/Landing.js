@@ -32,6 +32,7 @@ export default class Landing extends Component {
 
   componentDidMount() {
     axios.get("http://localhost:8000/api/questions").then(req => {
+      console.log(req.data);
       this.props.updateQuestions(req.data);
     });
   }

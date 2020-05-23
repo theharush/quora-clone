@@ -18,7 +18,8 @@ export default class App extends Component {
       user: null,
       isLogged: false,
       loadedQuestions: [],
-      lastQuestionDate: Date.now()
+      lastQuestionDate: Date.now(),
+      tagFilter: null
     };
     this.updateUser = this.updateUser.bind(this);
     this.updateQuestions = this.updateQuestions.bind(this);

@@ -10,6 +10,10 @@ var QuestionSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  tag: {
+    type: String,
+    default: "General"
+  },
   answers: [
     {
       name: { type: String },

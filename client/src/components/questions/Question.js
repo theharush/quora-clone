@@ -12,6 +12,7 @@ export default class Question extends Component {
     this.state = {
       question: {
         question: "Loading...",
+        tag: "Loading...",
         answers: [],
         questionId: ""
       }
@@ -58,6 +59,8 @@ export default class Question extends Component {
     }
     return (
       <div>
+        <p>{this.state.question.tag}</p>
+
         <h1>{this.state.question.question}</h1>
         <div className="question-actions">
           <Link to="#" className="inline">
