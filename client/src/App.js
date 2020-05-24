@@ -19,11 +19,38 @@ export default class App extends Component {
       isLogged: false,
       loadedQuestions: [],
       lastQuestionDate: Date.now(),
-      SelectedFilterTag: "All"
+      SelectedFilterTag: "All",
+      FilterTagChanged: false
     };
     this.updateUser = this.updateUser.bind(this);
+    this.getQuestions = this.getQuestions.bind(this);
     this.updateQuestions = this.updateQuestions.bind(this);
     this.updateFilterTag = this.updateFilterTag.bind(this);
+  }
+
+  getQuestions() {
+    const { SelectedFilterTag } = this.state,
+      lastQuestionDate = this.state.FilterTagChanged ? Date.now() : this.state.lastQuestionDate
+
+    axios.get(`http://localhost:8000/api/getQuestions?FilterTag=${SelectedFilterTag}&lastQuestionDate=${lastQuestionDate}`).then(req => {
+      this.updateQuestions(req.data)
+    })
+  }
+
+  updateQuestions(questions) {
+    if (questions && questions.length >= 1) {
+      this.setState({
+        loadedQuestions: questions,
+        lastQuestionDate: Date.parse(questions[questions.length - 1].created_date),
+        FilterTagChanged: false
+      });
+    } else {
+      this.setState({
+        loadedQuestions: [],
+        lastQuestionDate: Date.now(),
+        FilterTagChanged: false
+      })
+    }
   }
 
   updateUser(user) {
@@ -35,20 +62,14 @@ export default class App extends Component {
     });
   }
 
-  updateQuestions(questions) {
-    if (questions && questions.length >= 1)
-      this.setState({
-        loadedQuestions: questions,
-        lastQuestionDate: questions[questions.length - 1].created_date
-      });
-  }
 
   updateFilterTag(e) {
     const name = e.target.name;
 
     this.setState({
       SelectedFilterTag: name,
-    })
+      FilterTagChanged: true
+    }, () => this.getQuestions())
   }
 
   componentDidMount() {
@@ -74,6 +95,7 @@ export default class App extends Component {
                 questions={this.state.loadedQuestions}
                 lastQuestionDate={this.state.lastQuestionDate}
                 SelectedFilterTag={this.state.SelectedFilterTag}
+                getQuestions={this.getQuestions}
                 updateQuestions={this.updateQuestions}
                 updateFilterTag={this.updateFilterTag}
               />

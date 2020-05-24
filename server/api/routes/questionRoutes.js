@@ -4,7 +4,7 @@ module.exports = function (app) {
 
   //Question Routes
   app.get("/api/questions", question.getQuestions);
-  app.get("/api/questions/:LastQuestionDate", question.getMoreQuestions);
+  app.get("/api/getQuestions", question.getQuestionsbyDateAndTag);
 
   app.get("/api/question", question.getQuestion);
 

@@ -15,8 +15,10 @@ exports.getQuestions = function (req, res) {
 };
 
 //controller for fetching last 10 questions after a given date from DB
-exports.getMoreQuestions = function (req, res) {
-  Question.find({ created_date: { $lt: req.params.LastQuestionDate } })
+exports.getQuestionsbyDateAndTag = function (req, res) {
+  let { FilterTag, lastQuestionDate } = req.query;
+  const query = FilterTag === "All" ? { created_date: { $lt: lastQuestionDate } } : { created_date: { $lt: lastQuestionDate }, tag: FilterTag }
+  Question.find(query)
     .sort({ created_date: -1 })
     .limit(10)
     .exec(function (err, questions) {
