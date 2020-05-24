@@ -15,9 +15,9 @@ const expressSession = require("express-session")({
 //enabling cors
 const cors = require("cors");
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: "http://localhost:3000",
   credentials: true
-}
+};
 
 app.use(cors(corsOptions));
 
@@ -27,7 +27,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(expressSession);
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 //initialize mongoose
 const mongoose = require("mongoose");
