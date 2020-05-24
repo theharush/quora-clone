@@ -128,10 +128,17 @@ export default class App extends Component {
         <Router history={history}>
           <GuestNavBar />
           <Route
+            exact
+            path="/register"
+            render={props => <Register {...props} updateUser={this.updateUser} />}
+
+          />
+
+          <Route
+            exact
             path="/"
             render={props => <Login {...props} updateUser={this.updateUser} />}
           />
-          <Route exact path="/register" component={Register} />
         </Router>
       );
     }

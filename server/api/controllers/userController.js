@@ -3,7 +3,7 @@ const mongoose = require("mongoose"),
   User = mongoose.model("Users");
 
 //middleware for authenticating requests.
-exports.checkAuth = function(req, res, next) {
+exports.checkAuth = function (req, res, next) {
   if (req.user) {
     next();
   } else {
@@ -12,7 +12,7 @@ exports.checkAuth = function(req, res, next) {
   }
 };
 
-exports.userLogin = function(req, res, next) {
+exports.userLogin = function (req, res, next) {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return next(err);
@@ -22,7 +22,7 @@ exports.userLogin = function(req, res, next) {
       return res.json({ errMsg: info });
     }
 
-    req.logIn(user, function(err) {
+    req.logIn(user, function (err) {
       if (err) {
         return next(err);
       }
@@ -31,27 +31,27 @@ exports.userLogin = function(req, res, next) {
   })(req, res, next);
 };
 
-exports.userLogout = function(req, res) {
+exports.userLogout = function (req, res) {
   req.logout();
   res.send(200);
 };
 
-exports.getUser = function(req, res) {
+exports.getUser = function (req, res) {
   res.send(req.user);
 };
 
-exports.createUser = function(req, res) {
+exports.createUser = function (req, res) {
   User.register(
     new User({ username: req.body.username, name: req.body.name }),
     req.body.password,
-    function(err, user) {
+    function (err, user) {
       if (err) {
         console.log(err);
-        return res.redirect("/register.html");
+        return res.json(err);
       }
 
-      passport.authenticate("local")(req, res, function() {
-        res.redirect("/");
+      passport.authenticate("local")(req, res, function () {
+        res.json(req.user);
       });
     }
   );
