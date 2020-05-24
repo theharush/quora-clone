@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function (app) {
   const question = require("../controllers/questionController"),
     user = require("../controllers/userController");
 
@@ -12,4 +12,6 @@ module.exports = function(app) {
 
   app.get("/api/question/:questionId", question.getQuestion);
   app.post("/api/question/:questionId", user.checkAuth, question.postAnswer);
+
+  app.get("/api/getFilterTags", question.getFilterTags);
 };

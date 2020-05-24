@@ -51,7 +51,8 @@ db.on("error", err => {
 
 //importing mongoose schemas
 const Question = require("./api/models/questionModel"),
-  User = require("./api/models/userModel");
+  User = require("./api/models/userModel"),
+  Tag = require("./api/models/FilterTagModel");
 
 //initiallizing passport
 const passport = require("passport");

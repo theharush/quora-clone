@@ -19,10 +19,11 @@ export default class App extends Component {
       isLogged: false,
       loadedQuestions: [],
       lastQuestionDate: Date.now(),
-      tagFilter: null
+      SelectedFilterTag: "All"
     };
     this.updateUser = this.updateUser.bind(this);
     this.updateQuestions = this.updateQuestions.bind(this);
+    this.updateFilterTag = this.updateFilterTag.bind(this);
   }
 
   updateUser(user) {
@@ -40,6 +41,14 @@ export default class App extends Component {
         loadedQuestions: questions,
         lastQuestionDate: questions[questions.length - 1].created_date
       });
+  }
+
+  updateFilterTag(e) {
+    const name = e.target.name;
+
+    this.setState({
+      SelectedFilterTag: name,
+    })
   }
 
   componentDidMount() {
@@ -63,8 +72,10 @@ export default class App extends Component {
                 {...props}
                 user={this.state.user}
                 questions={this.state.loadedQuestions}
-                updateQuestions={this.updateQuestions}
                 lastQuestionDate={this.state.lastQuestionDate}
+                SelectedFilterTag={this.state.SelectedFilterTag}
+                updateQuestions={this.updateQuestions}
+                updateFilterTag={this.updateFilterTag}
               />
             )}
           />

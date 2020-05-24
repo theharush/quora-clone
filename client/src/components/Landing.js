@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import QuestionList from "./questions/QuestionList";
+import TagFilter from "./questions/TagFilter"
 
 export default class Landing extends Component {
   constructor(props) {
@@ -23,6 +24,11 @@ export default class Landing extends Component {
       <div>
         <p>Hello {name} </p>
 
+        <TagFilter
+          SelectedFilterTag={this.props.SelectedFilterTag}
+          updateFilterTag={this.props.updateFilterTag}
+        />
+
         <QuestionList questions={this.props.questions} />
 
         <button onClick={this.getMoreQuestions}>Get Sum' More</button>
@@ -32,7 +38,6 @@ export default class Landing extends Component {
 
   componentDidMount() {
     axios.get("http://localhost:8000/api/questions").then(req => {
-      console.log(req.data);
       this.props.updateQuestions(req.data);
     });
   }
