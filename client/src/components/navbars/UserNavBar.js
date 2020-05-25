@@ -11,7 +11,7 @@ export default class UserNavBar extends Component {
 
     logoutUser() {
         if (this.props.user) {
-            axios.post("/api/logout").then(
+            axios.get("/api/logout").then(
                 () => {
                     this.props.logoutUser({});
                 }
@@ -26,7 +26,7 @@ export default class UserNavBar extends Component {
                 <Link to="/" className="inline">Explore</Link>
                 <Link to="/newQuestion" className="inline">Ask</Link>
                 <div to="/login" className="inline">Hello, {this.props.user.name}</div>
-                <button className="inline" onClick={this.props.logoutUser}> logout</button>
+                <button className="inline" onClick={this.logoutUser}> logout</button>
             </nav>
         );
 
