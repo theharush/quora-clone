@@ -46,38 +46,57 @@ export default class Register extends Component {
   }
 
   render() {
+    let errMsg = null;
+    if (this.state.errMsg)
+      errMsg = (
+        <div class="alert alert-danger" role="alert">
+          {this.state.errMsg}
+        </div>
+      )
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h5>{this.state.errMsg}</h5>
-        <label>
-          Username:
-          <input
-            name="username"
-            type="text"
-            value={this.state.question}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <label>
-          Name:
-          <input
-            name="name"
-            type="text"
-            value={this.state.question}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            name="password"
-            type="password"
-            value={this.state.question}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div className="flex-container">
+        <div className="card form-card">
+          <form onSubmit={this.handleSubmit} className="card-body">
+            {errMsg}
+            <div className="form-group">
+              <label for="username"> Username:</label>
+              <input
+                className="form-control"
+                name="username"
+                type="text"
+                value={this.state.username}
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label for="name"> name:</label>
+              <input
+                className="form-control"
+                name="name"
+                type="text"
+                value={this.state.name}
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label for="password">Password:</label>
+              <input
+                className="form-control"
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <input
+              className="btn btn-primary btn-block"
+              type="submit"
+              value="Submit"
+            />
+          </form>
+        </div>
+      </div>
     );
   }
 }

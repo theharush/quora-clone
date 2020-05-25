@@ -19,13 +19,14 @@ export default class TagFilter extends Component {
     }
     render() {
         let tags = this.state.tags.map(tag => {
-            const className = this.props.SelectedFilterTag === tag.tag ? "activeTagFilter" : "";
+            const className = this.props.SelectedFilterTag === tag.tag ? "active-tag-filter" : "";
+
             return (
                 <li key={tag.tag} >
                     <button
                         onClick={this.props.updateFilterTag}
                         name={tag.tag}
-                        className={className}
+                        className={`btn btn-filter-tag btn-block ${className}`}
                     >
                         {tag.tag}
                     </button>
@@ -33,7 +34,7 @@ export default class TagFilter extends Component {
         })
 
         return (
-            <ul>
+            <ul className="tag-filter">
                 {tags}
             </ul>
         )
