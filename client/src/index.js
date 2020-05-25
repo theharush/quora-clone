@@ -1,7 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+
 import axios from "axios";
+
+import "jquery"
+import "popper.js"
+import "bootstrap/dist/js/bootstrap"
+import "bootstrap/dist/css/bootstrap.css"
+
+import "./index.css";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";

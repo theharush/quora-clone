@@ -8,6 +8,7 @@
     "cookie-parser": "^1.4.5",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
+    "popper.js": "^1.16.1",
     "react-cookie": "^4.0.3"
   },
   "devDependencies": {},

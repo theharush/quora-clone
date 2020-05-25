@@ -32,9 +32,7 @@ exports.userLogin = function (req, res, next) {
 };
 
 exports.userLogout = function (req, res) {
-  console.log("user is logging out");
   req.logout();
-  console.log(req.user);
   res.send(200);
 };
 

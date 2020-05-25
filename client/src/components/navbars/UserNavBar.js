@@ -29,6 +29,5 @@ export default class UserNavBar extends Component {
                 <button className="inline" onClick={this.logoutUser}> logout</button>
             </nav>
         );
-
     }
 }
