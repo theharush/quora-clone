@@ -21,7 +21,7 @@ export default class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
-    axios.post("http://localhost:8000/login", user).then(res => {
+    axios.post("/api/login", user).then(res => {
       if (res.data.user) {
         this.props.updateUser(res.data.user);
         history.push("/");

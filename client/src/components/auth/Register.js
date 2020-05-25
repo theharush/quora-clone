@@ -24,7 +24,7 @@ export default class Register extends Component {
       password: this.state.password
     };
 
-    axios.post("http://localhost:8000/register", user).then(res => {
+    axios.post("/api/register", user).then(res => {
       console.log(res);
       if (res.data.username) {
         this.props.updateUser(res.data);

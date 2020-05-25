@@ -22,7 +22,7 @@ export default class NewQuestion extends Component {
       question: this.state.question
     };
 
-    axios.post("http://localhost:8000/api/postQuestion", question).then(res => {
+    axios.post("/api/postQuestion", question).then(res => {
       if (res.data.question) {
         const updatedQuestions = [...this.props.questions, res.data];
         this.props.updateQuestions(updatedQuestions);

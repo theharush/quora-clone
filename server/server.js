@@ -3,7 +3,7 @@ const keys = require("./config/keys"),
 
 const express = require("express"),
   app = express(),
-  port = process.env.PORT || 8000;
+  port = process.env.PORT || 5000;
 
 // creating a session
 const expressSession = require("express-session")({

@@ -11,7 +11,7 @@ export default class UserNavBar extends Component {
 
     logoutUser() {
         if (this.props.user) {
-            axios.post("http://localhost:8000/logout").then(
+            axios.post("/api/logout").then(
                 () => {
                     this.props.logoutUser({});
                 }

@@ -20,7 +20,7 @@ export default class NewQuestion extends Component {
 
     axios
       .post(
-        `http://localhost:8000/api/question/${this.props.questionId}`,
+        `/api/question/${this.props.questionId}`,
         answer
       )
       .then(res => {

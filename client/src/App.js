@@ -22,6 +22,7 @@ export default class App extends Component {
       SelectedFilterTag: "All",
       FilterTagChanged: false
     };
+
     this.updateUser = this.updateUser.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
     this.updateQuestions = this.updateQuestions.bind(this);
@@ -32,7 +33,7 @@ export default class App extends Component {
     const { SelectedFilterTag } = this.state,
       lastQuestionDate = this.state.FilterTagChanged ? Date.now() : this.state.lastQuestionDate
 
-    axios.get(`http://localhost:8000/api/getQuestions?FilterTag=${SelectedFilterTag}&lastQuestionDate=${lastQuestionDate}`).then(req => {
+    axios.get(`/api/getQuestions?FilterTag=${SelectedFilterTag}&lastQuestionDate=${lastQuestionDate}`).then(req => {
       this.updateQuestions(req.data)
     })
   }
@@ -64,7 +65,7 @@ export default class App extends Component {
 
 
   updateFilterTag(e) {
-    const name = e.target.name;
+    const { name } = e.target;
 
     this.setState({
       SelectedFilterTag: name,
@@ -73,7 +74,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:8000/getUser").then(res => {
+    axios.get("/api/getUser").then(res => {
       if (res.data) {
         this.updateUser(res.data);
       }

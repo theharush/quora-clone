@@ -11,7 +11,7 @@ export default class TagFilter extends Component {
         }
     }
     componentDidMount() {
-        axios.get("http://localhost:8000/api/getFilterTags").then(req => {
+        axios.get("/api/getFilterTags").then(req => {
             if (req.data) {
                 this.setState({ tags: [{ tag: "All" }, ...req.data] })
             }

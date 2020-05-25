@@ -30,7 +30,7 @@ export default class Question extends Component {
   }
 
   getQuestionFromServer(questionId) {
-    axios.get(`http://localhost:8000/api/question/${questionId}`).then(req => {
+    axios.get(`/api/question/${questionId}`).then(req => {
       if (req.data.question) this.setQuestionState(req.data);
     });
   }
