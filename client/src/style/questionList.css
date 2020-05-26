@@ -1,0 +1,19 @@
+.feed-container{
+    flex-grow:9;
+    padding-left:25px;
+    margin-bottom:25px;
+  }
+  .feed{
+    list-style: none;
+    padding-left:0px;
+  }
+  .feed-item{
+    margin-bottom:8px;
+  }
+  .feed-item h3{
+    color:rgba(0, 0, 0, 0.9);
+  }
+  .feed-item p{
+    margin-bottom:0px;
+    color:gray;
+  }

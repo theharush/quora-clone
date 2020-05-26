@@ -8,7 +8,7 @@ import "popper.js"
 import "bootstrap/dist/js/bootstrap"
 import "bootstrap/dist/css/bootstrap.css"
 
-import "./index.css";
+import "./style/main.css";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";

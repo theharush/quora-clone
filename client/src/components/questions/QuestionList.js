@@ -11,6 +11,6 @@ export default class QuestionList extends Component {
             />
         ))
 
-        return <ul> {questions} </ul>;
+        return <ul class="feed"> {questions} </ul>;
     }
 }
