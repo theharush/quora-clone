@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 import AnswerList from "./AnswerList";
 import AnswerForm from "./AnswerForm";
+
+import "../../style/question.css";
 
 export default class Question extends Component {
   constructor(props) {
@@ -58,30 +59,34 @@ export default class Question extends Component {
       answerList = <AnswerList answers={this.state.question.answers} />;
     }
     return (
-      <div>
-        <p>{this.state.question.tag}</p>
+      <div className="container mt-3">
+        <div className="card">
+          <div className="card-body">
+            <div className="info">
+              <p>{this.state.question.tag}</p>
+              <p>{this.state.question.created_date}</p>
+            </div>
+            <h1>{this.state.question.question}</h1>
+          </div>
+          <div className="card-body answer-list-container">
 
-        <h1>{this.state.question.question}</h1>
-        <div className="question-actions">
-          <Link to="#" className="inline">
-            Answer
-          </Link>
-          <Link to="#" className="inline">
-            Follow
-          </Link>
+            <div className="answer-count" id="answerCount">
+              {this.state.question.answers.length} Answers
+            </div>
+
+            {answerList}
+
+          </div>
+
+          <div className="flex-container pt-0">
+            <AnswerForm
+              questionId={this.state.question._id}
+              questions={this.props.questions}
+              updateQuestions={this.props.updateQuestions}
+              setQuestionState={this.setQuestionState}
+            />
+          </div>
         </div>
-        <div className="answer-count" id="answerCount">
-          {this.state.question.answers.length} Answers
-        </div>
-
-        {answerList}
-
-        <AnswerForm
-          questionId={this.state.question._id}
-          questions={this.props.questions}
-          updateQuestions={this.props.updateQuestions}
-          setQuestionState={this.setQuestionState}
-        />
       </div>
     );
   }

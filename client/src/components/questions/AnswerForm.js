@@ -56,17 +56,22 @@ export default class NewQuestion extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Answer:
+      <form onSubmit={this.handleSubmit} className="form-card">
+        <div className="form-group">
+          <label for="answer">Answer:</label>
           <input
+            className="form-control"
             name="answer"
             type="text"
             value={this.state.question}
             onChange={this.handleInputChange}
           />
-        </label>
-        <input type="submit" value="Submit" />
+        </div>
+        <input
+          type="submit"
+          value="Submit"
+          className="btn btn-primary btn-block"
+        />
       </form>
     );
   }

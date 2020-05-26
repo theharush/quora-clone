@@ -8,6 +8,6 @@ export default class AnswerList extends Component {
       <AnswerListItem answer={answer} key={answer._id} />
     ));
 
-    return <ul> {answers} </ul>;
+    return <ul className="answer-list"> {answers} </ul>;
   }
 }

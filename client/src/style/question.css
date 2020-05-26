@@ -1,0 +1,29 @@
+.info{
+    display: flex;
+    justify-content: space-between;
+}
+.info p{
+    color:gray;
+    margin-bottom: 0px;
+}
+.answer-list-container{
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+.answer-count{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    padding-bottom: 1rem;
+    margin-bottom: 0.5rem;
+}
+.answer-list{
+    list-style: none;
+    padding-left: 0px;
+}
+.answer{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    margin-top:1rem;
+    padding-bottom: 1rem;
+
+}
+.card{
+    padding-bottom:2rem;
+}
