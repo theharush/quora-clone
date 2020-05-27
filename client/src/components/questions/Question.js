@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import moment from "moment";
 
 import AnswerList from "./AnswerList";
 import AnswerForm from "./AnswerForm";
@@ -54,17 +55,19 @@ export default class Question extends Component {
   }
 
   render() {
-    let answerList;
+    let answerList, created_date;
     if (this.state.question.answers !== undefined) {
       answerList = <AnswerList answers={this.state.question.answers} />;
     }
+    created_date = moment(this.state.question.created_date).format('MMMM Do YYYY, h:mm');
+
     return (
       <div className="container mt-3">
         <div className="card question-card">
           <div className="card-body">
             <div className="info">
               <p>{this.state.question.tag}</p>
-              <p>{this.state.question.created_date}</p>
+              <p>{created_date}</p>
             </div>
             <h1>{this.state.question.question}</h1>
           </div>
