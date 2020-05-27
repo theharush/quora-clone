@@ -8,6 +8,7 @@ import "../style/tagFilter.css";
 
 
 export default class Landing extends Component {
+
   render() {
     return (
       <div className="container">
@@ -31,9 +32,5 @@ export default class Landing extends Component {
       </div>
 
     );
-  }
-
-  componentDidMount() {
-    this.props.getQuestions();
   }
 }

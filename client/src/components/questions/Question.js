@@ -60,7 +60,7 @@ export default class Question extends Component {
     }
     return (
       <div className="container mt-3">
-        <div className="card">
+        <div className="card question-card">
           <div className="card-body">
             <div className="info">
               <p>{this.state.question.tag}</p>

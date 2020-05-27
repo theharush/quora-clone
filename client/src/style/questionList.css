@@ -9,6 +9,7 @@
   }
   .feed-item{
     margin-bottom:8px;
+    padding-bottom:0px
   }
   .feed-item h3{
     color:rgba(0, 0, 0, 0.9);

@@ -61,6 +61,9 @@ export default class App extends Component {
       user: user,
       isLogged: isLogged
     });
+
+    this.getQuestions();
+
   }
 
 
