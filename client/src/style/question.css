@@ -6,13 +6,16 @@
     color:gray;
     margin-bottom: 0px;
 }
-.answer-list-container{
-    border-top: 1px solid rgba(0, 0, 0, 0.125);
-}
+
 .answer-count{
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-    padding-bottom: 1rem;
+    padding: 1rem 0px 1rem 0px;
+    
     margin-bottom: 0.5rem;
+}
+.answer-list-container{
+    padding-top:0px !important;
 }
 .answer-list{
     list-style: none;

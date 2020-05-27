@@ -1,14 +1,19 @@
 body {
   background-color: #f1f1f1;
+  padding-bottom: 2rem;
+  transition: 0.3s;
 }
 
 .flex-container {
   display:flex;
   justify-content: space-around;
   align-content: center;
-  padding-top: 2em;
+  padding: 2em;
 }
 
 .form-card{
   width:30rem;
+}
+.collapsing{
+  transition: 0.3s;
 }

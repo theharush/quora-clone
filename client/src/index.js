@@ -5,7 +5,7 @@ import axios from "axios";
 
 import "jquery"
 import "popper.js"
-import "bootstrap/dist/js/bootstrap"
+import "bootstrap"
 import "bootstrap/dist/css/bootstrap.css"
 
 import "./style/main.css";
